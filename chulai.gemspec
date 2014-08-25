@@ -18,7 +18,11 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
+  spec.add_dependency "thor", "~> 0.19"
+
   spec.add_development_dependency "bundler", "~> 1.6"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_development_dependency "cucumber", "~> 1.3"
+  spec.add_development_dependency "aruba", "~> 0.6"
 end
