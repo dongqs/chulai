@@ -27,4 +27,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "webmock", "~> 1.18"
   spec.add_development_dependency "cucumber", "~> 1.3"
   spec.add_development_dependency "aruba", "~> 0.6"
+  spec.add_development_dependency "guard-rspec"
+  spec.add_development_dependency "guard-cucumber"
 end

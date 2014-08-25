@@ -6,10 +6,16 @@ describe Chulai::Base do
     expect(Chulai::Base.version).to eql Chulai::VERSION
   end
 
-  it "service status" do
-    response = RestClient.get "http://wo.chulai.la/status"
+  describe "service status" do
 
-    expect(response).to be_an_instance_of(String)
+    it "ok" do
+
+      stub_request(:get, "http://wo.chulai.la/status").
+        to_return(status: 200, body: '{"status": "success"', headers: {})
+
+      response = RestClient.get "http://wo.chulai.la/status"
+      expect(response).to be_an_instance_of(String)
+    end
   end
 end
 
