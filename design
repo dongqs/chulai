@@ -1,0 +1,35 @@
+check account
+  if check auth_token / username
+    check user status
+  else
+    sign in / sign up
+
+check ssh
+  check or write ssh config
+  if check ssh key
+    check key on server
+  else
+    generate ssh key
+    upload ssh key
+
+check project
+  check git
+    init
+    commited
+    on master
+  check Gemfile
+    rails
+    required gems
+    check bundle installed
+  if check project chulaied
+    create or import
+  check status
+git push
+deploy
+
+utilities
+  push
+  build
+  migrate
+  rename
+  log
