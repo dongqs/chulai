@@ -3,5 +3,6 @@ require 'chulai/base'
 require 'rest-client'
 
 module Chulai
-  # Your code goes here...
+
+  BASE_URL = "http://wo.chulai.la"
 end

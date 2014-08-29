@@ -11,5 +11,9 @@ module Chulai
     end
     map %w(-v --version) => :version
 
+    desc "status", "Prints the chulai server status"
+    def status
+      puts "chulai server #{Chulai::Base.status}"
+    end
   end
 end
