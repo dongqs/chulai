@@ -27,5 +27,27 @@ describe Chulai::Base do
       }.to raise_error
     end
   end
+
+  describe "check user auth_token" do
+
+    it "get auth_token" do
+
+      Git = double "Git", global_config: {"chulai.auth_token" => "ooxx", "chulai.username" => "aya"}
+
+      base = Chulai::Base.new
+      base.load_user_info
+      expect(base.auth_token).to eql "ooxx"
+      expect(base.username).to eql "aya"
+      expect(base.load_user_info).not_to be_nil
+    end
+
+    it "failed to get auth_token" do
+
+      Git = double "Git", global_config: {}
+
+      base = Chulai::Base.new
+      expect(base.load_user_info).to be_nil
+    end
+  end
 end
 
