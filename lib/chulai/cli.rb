@@ -5,6 +5,21 @@ module Chulai
 
   class CLI < Thor
 
+    default_task :deploy
+
+    desc "deploy", "Deploy the newest version"
+    def deploy
+      base = Base.new
+      base.gemfile
+      base.account
+      base.ssh_key
+      base.ssh_config
+      base.push
+      base.deploy
+      base.clean
+      base.open
+    end
+
     desc "version", "Prints the chulai's version infomation"
     def version
       puts "chulai #{Chulai::VERSION}"
