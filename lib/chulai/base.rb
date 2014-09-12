@@ -50,10 +50,9 @@ module Chulai
       puts "checking account"
       @auth_token = Git.global_config 'chulai.token'
       res = http_without_auth :post, "/account_check.json", auth_token: @auth_token
-      @email = res["email"]
       @username = res["username"]
       if res["status"] == 'success'
-        [@email, @username, @auth_token]
+        [@username, @auth_token]
       else
         puts "error: #{res["message"]}"
         exit
@@ -73,7 +72,6 @@ module Chulai
         password: password
       }
       if res["status"] == 'success'
-        @email = res["email"]
         @username = res["username"]
         @auth_token = res["auth_token"]
         Git.global_config 'chulai.token', @auth_token
@@ -155,30 +153,19 @@ Er  ror: those gems are required, add them to Gemfile
         res = http :post, "/birth.json"
 
         raise res.inspect unless res['status'] == 'success'
-        @identity, @token = res["identity"], res["token"]
+        @identity, @name = res["identity"], res["name"]
         git.add_remote :chulai, "#{SSH_KEY}:#{@identity}.git"
         git.config 'chulai.identity', @identity
-        git.config 'chulai.token', @token
+        git.config 'chulai.name', @name
       else
         @identity = git.config 'chulai.identity'
-        @token = git.config 'chulai.token'
 
         res = http :post, "/check.json", identity: @identity
 
         raise res.inspect unless res && res['status'] == 'success'
+        @name = res["name"]
       end
       git.push(git.remote("chulai"))
-    end
-
-    def identity
-      return @identity if @identity
-
-      @identity = git.config 'chulai.identity'
-      unless @identity
-        puts "ERROR: should have been pushed server"
-        exit
-      end
-      @identity
     end
 
     def deploy
@@ -191,12 +178,12 @@ Er  ror: those gems are required, add them to Gemfile
 
     def clean
       puts "cleaning"
-      res = http :post, "/clean.json", app: identity
+      res = http :post, "/clean.json", app: @identity
       puts res.inspect
     end
 
     def open
-      Launchy.open "http://public.#{identity}.#{SUFFIX}"
+      Launchy.open "http://#{@username}.#{@name}.#{SUFFIX}"
     end
 
     private
