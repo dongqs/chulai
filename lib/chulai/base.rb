@@ -171,14 +171,14 @@ Er  ror: those gems are required, add them to Gemfile
     def deploy
       puts "deploying"
 
-      stream :post, "/deploy.stream", app: identity, commit: git.log.first.sha , comment: git.log.first.message do |chunk|
+      stream :post, "/deploy.stream", identity: identity, commit: git.log.first.sha , comment: git.log.first.message do |chunk|
         puts chunk
       end
     end
 
     def clean
       puts "cleaning"
-      res = http :post, "/clean.json", app: @identity
+      res = http :post, "/clean.json", identity: @identity
       puts res.inspect
     end
 
