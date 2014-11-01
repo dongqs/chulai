@@ -138,8 +138,8 @@ module Chulai
       end
       unless missing.empty?
         puts <<-EOF
-Er  ror: those gems are required, add them to Gemfile
-#{  missing.map {|gem|"  gem '#{gem}'"}.join("\n")}
+Error: those gems are required, add them to Gemfile
+#{missing.map {|gem|"  gem '#{gem}'"}.join("\n")}
         EOF
         exit
       end
