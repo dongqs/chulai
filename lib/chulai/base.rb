@@ -192,7 +192,12 @@ Error: those gems are required, add them to Gemfile
     end
 
     def open
-      Launchy.open "http://#{@username}.#{@name}.#{SUFFIX}"
+      url = "http://#{@username}.#{@name}.#{SUFFIX}"
+      Launchy.open url
+    rescue => exc
+      puts "failed to launch any browser: #{exc.to_s}"
+      puts url
+      exit
     end
 
     private
