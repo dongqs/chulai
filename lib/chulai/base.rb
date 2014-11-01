@@ -166,6 +166,9 @@ Er  ror: those gems are required, add them to Gemfile
         @name = res["name"]
       end
       git.push(git.remote("chulai"))
+    rescue => exc
+      puts "failed to push code to git server: #{exc.to_s}"
+      exit
     end
 
     def deploy
@@ -174,12 +177,18 @@ Er  ror: those gems are required, add them to Gemfile
       stream :post, "/deploy.stream", identity: identity, commit: git.log.first.sha , comment: git.log.first.message do |chunk|
         puts chunk
       end
+    rescue => exc
+      puts "deploy failed: #{exc.to_s}"
+      exit
     end
 
     def clean
       puts "cleaning"
       res = http :post, "/clean.json", identity: @identity
       puts res.inspect
+    rescue => exc
+      puts "failed to clean old instances: #{exc.to_s}"
+      exit
     end
 
     def open
