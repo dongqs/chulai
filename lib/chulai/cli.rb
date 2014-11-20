@@ -16,7 +16,6 @@ module Chulai
       base.ssh_config
       base.push
       base.deploy
-      base.clean
       base.open
     end
 
