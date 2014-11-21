@@ -126,21 +126,9 @@ module Chulai
         exit
       end
       @gemfile = Gemnasium::Parser::Gemfile.new File.read("Gemfile")
-      gems = @gemfile.dependencies.map(&:name)
-      unless gems.include? 'rails'
+      @gems = @gemfile.dependencies.map(&:name)
+      unless @gems.include? 'rails'
         puts "Error: chulai ONLY support Rails projects by now"
-        exit
-      end
-      requires = ['puma', 'mysql2', 'therubyracer']
-      missing = []
-      requires.each do |gem|
-        missing << gem unless gems.include? gem
-      end
-      unless missing.empty?
-        puts <<-EOF
-Error: those gems are required, add them to Gemfile
-#{missing.map {|gem|"  gem '#{gem}'"}.join("\n")}
-        EOF
         exit
       end
     end
@@ -174,7 +162,7 @@ Error: those gems are required, add them to Gemfile
     def deploy
       puts "deploying"
 
-      stream :post, "/deploy.stream", identity: identity, commit: git.log.first.sha , comment: git.log.first.message do |chunk|
+      stream :post, "/deploy.stream", identity: identity, commit: git.log.first.sha , comment: git.log.first.message, gems: @gems do |chunk|
         puts chunk
       end
     rescue => exc
