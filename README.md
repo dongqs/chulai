@@ -1,28 +1,21 @@
 # Chulai
 
-TODO: Write a gem description
+Rails PaaS
 
 ## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'chulai'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
 
     $ gem install chulai
 
 ## Usage
 
-TODO: Write usage instructions here
+    $ rails new example
+    $ cd example
+    $ bundle install
+    $ chulai
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/chulai/fork )
+1. Fork it ( https://github.com/dongqs/chulai/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
