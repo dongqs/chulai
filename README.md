@@ -4,19 +4,20 @@ Rails PaaS
 
 ## Installation
 
-    $ gem install chulai
+    gem install chulai
 
-## Usage
+## How to
 
-    $ rails new example
-    $ cd example
-    $ bundle install
-    $ chulai
+sign up on http://wo.chulai.la/
 
-## Contributing
-
-1. Fork it ( https://github.com/dongqs/chulai/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+    rails new example
+    cd example
+    bundle install
+    rails generate scaffold article title:string content:text
+    bundle exec rake db:migrate
+    awk 'NR==2{print "  root :to => redirect(\"/articles\")"}1' \
+      config/routes.rb | tee config/routes.rb
+    git init
+    git add .
+    git commit -m 'first commit'
+    chulai
