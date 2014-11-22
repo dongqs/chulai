@@ -15,10 +15,12 @@ sign up on http://wo.chulai.la/
     bundle install
     rails generate scaffold article title:string content:text
     bundle exec rake db:migrate
-    echo 'Rails.application.routes.draw do
+    cat <<EOF>config/routes.rb
+    Rails.application.routes.draw do
       root :to => redirect("/articles")
       resources :articles
-    end' > config/routes.rb
+    end
+    EOF
     git init
     git add .
     git commit -m 'first commit'
