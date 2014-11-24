@@ -10,6 +10,7 @@ Rails PaaS
 
 sign up on http://wo.chulai.la/
 
+    # create a new rails app
     rails new example
     cd example
     bundle install
@@ -21,7 +22,11 @@ sign up on http://wo.chulai.la/
       resources :articles
     end
     EOF
+
+    # commit
     git init
     git add .
     git commit -m 'first commit'
+
+    # deploy with chulai.la
     chulai
