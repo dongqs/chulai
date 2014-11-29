@@ -170,15 +170,6 @@ module Chulai
       exit
     end
 
-    def clean
-      puts "cleaning"
-      res = http :post, "/clean.json", identity: @identity
-      puts res.inspect
-    rescue => exc
-      puts "failed to clean old instances: #{exc.to_s}"
-      exit
-    end
-
     def open
       url = "http://#{@username}.#{@name}.#{SUFFIX}"
       Launchy.open url
